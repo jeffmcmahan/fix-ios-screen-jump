@@ -1,15 +1,15 @@
 window.addEventListener('scroll', () => {
     
-    const focusedElement = document.activeElement
+    const focusedElement = document.activeElement as HTMLElement
 
     function unscroll() {
         setTimeout(() => window.scrollTo(0, 0), 100)
         focusedElement.removeEventListener('blur', unscroll)
-        document.activeElement.removeAttribute('willUnscroll')
+        focusedElement.dataset.willunscroll = '0'
     }
 
-    if (!document.activeElement.hasAttribute('willUnscroll')) {
-        document.activeElement.setAttribute('willUnscroll', '1')
+    if (focusedElement.dataset.willunscroll != '1') {
+        focusedElement.dataset.willunscroll = '1'
         focusedElement.addEventListener('blur', unscroll)
     }
 })
